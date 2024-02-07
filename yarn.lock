@@ -1687,6 +1687,11 @@
     opencollective-postinstall "^2.0.3"
     superstruct "^0.6.2"
 
+"@react-native-firebase/database@^18.8.0":
+  version "18.8.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/database/-/database-18.8.0.tgz#c15c3cb65ee859007879533665b4befc7f77b251"
+  integrity sha512-+YmspZH0W8r8lbpNEPRBkd3c+m6+/iw4Tf/VN3ISOM8IGb6P01aJzK9Cu+qNZR2ywr5WMsbUJ+S0HLbwGqAPJw==
+
 "@react-native/assets-registry@0.73.1":
   version "0.73.1"
   resolved "https://registry.yarnpkg.com/@react-native/assets-registry/-/assets-registry-0.73.1.tgz#e2a6b73b16c183a270f338dc69c36039b3946e85"
