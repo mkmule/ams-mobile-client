@@ -1,8 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import analytics from '@react-native-firebase/analytics';
 
 function App(): React.JSX.Element {
   const [count, setCount] = useState(-1);
+
+  useEffect(() => {
+    analytics()
+      .getAppInstanceId()
+      .then(instanceId => {
+        console.log(`Analytics instance ID: ${instanceId}`);
+      });
+  }, []);
 
   return (
     <SafeAreaView>
