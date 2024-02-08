@@ -16,15 +16,19 @@ function App(): React.JSX.Element {
     database()
       .ref('/channels/test')
       .on('value', snapshot => {
-        console.log('User data: ', snapshot.val());
+        setCount(snapshot.val());
       });
-
   }, []);
 
   return (
     <SafeAreaView>
       <View style={styles.container}>
-        <Text style={styles.textCount}>Meeting count: {count}</Text>
+        <Text style={styles.textTitle}>
+          AMS{'\n'}Attendees Monitoring System
+        </Text>
+        <Text style={styles.textCount}>
+          Current number of participants: {count}
+        </Text>
       </View>
     </SafeAreaView>
   );
@@ -37,7 +41,14 @@ const styles = StyleSheet.create({
     padding: 24,
     backgroundColor: '#fff',
   },
+  textTitle: {
+    textAlign: 'center',
+    color: '#000',
+    fontSize: 20,
+    marginBottom: 18,
+  },
   textCount: {
+    textAlign: 'center',
     color: '#000',
   },
 });
