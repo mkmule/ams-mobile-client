@@ -11,3 +11,10 @@ export const onMeetingsUpdated = (callback: (meetings: Meeting[]) => void) => {
     callback(meetings as Meeting[]);
   });
 };
+export const onMeetingUpdated = (uid: string, callback: (meeting: Meeting) => void) => {
+  const meetingsRef = ref(database(), `/meetings/${uid}`);
+
+  return onValue(meetingsRef, (snapshot) => {
+    callback(snapshot.val() as Meeting);
+  });
+};

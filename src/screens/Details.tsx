@@ -1,13 +1,47 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { onMeetingUpdated } from '../services/meetings.ts';
+import { Meeting } from '../types/business.ts';
 
-const Details = () => {
+const Details = ({ route }: any) => {
+  const uid = route.params.uid;
+  const [meeting, setMeeting] = useState<Meeting>();
+
+  useEffect(() => {
+    const unsubscribeMeetingRef = onMeetingUpdated(uid, setMeeting);
+
+    return () => {
+      unsubscribeMeetingRef();
+    };
+  }, []);
 
   return (
-    <View>
-      <Text>This is Details</Text>
+    <View style={styles.container}>
+      <Text style={styles.textParticipants}>
+        Number of Attendees
+      </Text>
+      <Text style={styles.textNumberOfParticipants}>
+        {Number.isInteger(meeting?.numberOfParticipants) ? meeting?.numberOfParticipants : 'N/A'}
+      </Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 16,
+  },
+  textParticipants: {
+    fontSize: 24,
+    textAlign: 'center',
+  },
+  textNumberOfParticipants: {
+    marginTop: 4,
+    fontSize: 24,
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+});
 
 export default Details;

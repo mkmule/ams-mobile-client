@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { SectionList, StyleSheet, Text, View } from 'react-native';
-import { onMeetingsUpdated } from '../services/attendees.ts';
+import { onMeetingsUpdated } from '../services/meetings.ts';
 import { Meeting } from '../types/business.ts';
 
 const Dashboard = ({ navigation }: any) => {
@@ -14,8 +14,8 @@ const Dashboard = ({ navigation }: any) => {
     };
   }, []);
 
-  const handleNavigateToDetails = (meetingUid: string) => {
-    navigation.navigate('Details', { uid: meetingUid });
+  const handleNavigateToDetails = (meeting: Meeting) => {
+    navigation.navigate('Details', { uid: meeting.uid, name: meeting.name });
   };
 
   return (
@@ -23,7 +23,7 @@ const Dashboard = ({ navigation }: any) => {
       <SectionList
         sections={[{ title: 'Active meetings', data: activeMeetings }]}
         renderItem={({ item }) =>
-          <Text style={styles.item} onPress={() => handleNavigateToDetails(item.uid as string)}>{item.name}</Text>
+          <Text style={styles.item} onPress={() => handleNavigateToDetails(item)}>{item.name}</Text>
         }
         renderSectionHeader={({ section }) => (<Text style={styles.sectionHeader}>{section.title}</Text>)}
         keyExtractor={item => item.uid as string}
