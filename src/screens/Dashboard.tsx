@@ -21,7 +21,7 @@ const Dashboard = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       <SectionList
-        sections={[{ title: 'Active meetings', data: activeMeetings }]}
+        sections={[{ title: 'Active Meetings', data: activeMeetings }]}
         renderItem={({ item }) =>
           <Text style={styles.item} onPress={() => handleNavigateToDetails(item)}>{item.name}</Text>
         }
@@ -37,16 +37,16 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   sectionHeader: {
-    paddingVertical: 8,
-    paddingHorizontal: 4,
+    backgroundColor: 'rgba(247,247,247,1.0)',
     fontSize: 14,
     fontWeight: 'bold',
-    backgroundColor: 'rgba(247,247,247,1.0)',
+    paddingHorizontal: 4,
+    paddingVertical: 8,
   },
   item: {
-    padding: 12,
     fontSize: 18,
     height: 44,
+    padding: 12,
   },
 });
 

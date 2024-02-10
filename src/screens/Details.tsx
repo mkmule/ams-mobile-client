@@ -37,10 +37,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   textNumberOfParticipants: {
-    marginTop: 4,
     fontSize: 24,
-    textAlign: 'center',
     fontWeight: 'bold',
+    marginTop: 4,
+    textAlign: 'center',
   },
 });
 
