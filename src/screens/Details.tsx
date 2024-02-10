@@ -1,13 +1,13 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-const MeetingDetails = () => {
+const Details = () => {
 
   return (
     <View>
-      <Text>This is MeetingDetails</Text>
+      <Text>This is Details</Text>
     </View>
   );
 };
 
-export default MeetingDetails;
+export default Details;
