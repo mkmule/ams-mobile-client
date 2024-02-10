@@ -1,55 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { SafeAreaView, StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import analytics from '@react-native-firebase/analytics';
-import database from '@react-native-firebase/database';
+import Dashboard from './screens/Dashboard.tsx';
+import MeetingDetails from './screens/MeetingDetails.tsx';
 
-function App(): React.JSX.Element {
-  const [count, setCount] = useState(-1);
+const Stack = createNativeStackNavigator();
 
+const App = (): React.JSX.Element => {
   useEffect(() => {
     analytics()
       .getAppInstanceId()
       .then(instanceId => {
         console.log(`Analytics instance ID: ${instanceId}`);
       });
-
-    database()
-      .ref('/channels/test')
-      .on('value', snapshot => {
-        setCount(snapshot.val());
-      });
   }, []);
 
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
-        <Text style={styles.textTitle}>
-          AMS{'\n'}Attendees Monitoring System
-        </Text>
-        <Text style={styles.textCount}>
-          Current number of participants: {count}
-        </Text>
-      </View>
-    </SafeAreaView>
+    <NavigationContainer>
+      <SafeAreaView style={styles.container}>
+        <Stack.Navigator initialRouteName={'Dashboard'}>
+          <Stack.Screen
+            name="Dashboard"
+            component={Dashboard}
+            options={{ title: 'Dashboard' }}
+          />
+          <Stack.Screen
+            name="MeetingDetails"
+            component={MeetingDetails}
+            options={({ route }: any) => ({ title: route.params?.name || 'N/A' })}
+          />
+        </Stack.Navigator>
+      </SafeAreaView>
+    </NavigationContainer>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
-    padding: 24,
-    backgroundColor: '#fff',
-  },
-  textTitle: {
-    textAlign: 'center',
-    color: '#000',
-    fontSize: 20,
-    marginBottom: 18,
-  },
-  textCount: {
-    textAlign: 'center',
-    color: '#000',
   },
 });
 
